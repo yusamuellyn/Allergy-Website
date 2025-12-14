@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+const allergySchema = new mongoose.Schema({
+    risk_score: { type: Number },
+    top_allergies: [{ type: String }]
+}, { _id: false });
+
 const dataSchema = new mongoose.Schema({
     place_id: { 
         type: String, 
@@ -18,7 +23,12 @@ const dataSchema = new mongoose.Schema({
     },
     type: { 
         type: Boolean 
-    }
+    },
+
+    menuText: {
+        type: String
+    },
+    allergyAnalysis: allergySchema
 }, { timestamps: true });
 
 
