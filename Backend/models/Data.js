@@ -28,6 +28,10 @@ const dataSchema = new mongoose.Schema({
     menuText: {
         type: String
     },
+
+    image: {
+        type: String
+    },
     allergyAnalysis: allergySchema
 }, { timestamps: true });
 

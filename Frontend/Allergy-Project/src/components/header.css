@@ -1,0 +1,59 @@
+.header {
+    background-color: #8b0000;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 20px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 75px;
+  }
+  
+  .header .left-section {
+    width: 208px;
+  }
+  
+  @media (max-width: 800px) {
+    .header .left-section {
+      width: unset;
+    }
+  }
+
+  .header .middle-section {
+    flex: 1;
+    max-width: 850px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+  }
+
+  .header .right-section {
+
+    display: flex;
+    flex-direction: row;
+    
+  }
+
+  .header .about-us-link {
+    color: white;
+    display: flex;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .header .how-works-link{
+    color: white;
+    display: flex;
+    padding-left: 13px;
+    padding-right: 30px;
+  }
+  
+  
+  
