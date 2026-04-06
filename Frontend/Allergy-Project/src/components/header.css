@@ -1,23 +1,66 @@
 .header {
-    background-color: #8b0000;
+    background: linear-gradient(135deg, #7a0000 0%, #8b0000 48%, #6b0000 100%);
     color: white;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 18px;
+    padding-right: 18px;
     margin-bottom: 20px;
-  
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-  
+
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 75px;
+    min-height: 76px;
+    z-index: 1500;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
   }
-  
+
+  .header-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 10px 8px 6px;
+    margin: -8px -10px -8px -6px;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+  }
+
+  .header-brand:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .header-brand-mark {
+    width: 10px;
+    height: 36px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #fecaca 0%, #fff 45%, #fecaca 100%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+  }
+
+  .header-brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .header-brand-title {
+    font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+    font-weight: 800;
+    font-size: 1.28rem;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
   .header .left-section {
-    width: 208px;
+    width: auto;
+    min-width: 0;
   }
   
   @media (max-width: 800px) {
@@ -41,19 +84,36 @@
     
   }
 
-  .header .about-us-link {
-    color: white;
+  .header .about-us-link,
+  .header .how-works-link {
+    color: rgba(255, 255, 255, 0.95);
     display: flex;
-    padding-left: 13px;
-    padding-right: 13px;
+    align-items: center;
+    padding: 10px 14px;
+    margin-left: 4px;
+    border-radius: 10px;
+    font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  .header .how-works-link{
-    color: white;
-    display: flex;
-    padding-left: 13px;
-    padding-right: 30px;
+  .header .how-works-link {
+    padding-right: 8px;
   }
-  
-  
+
+  .header .about-us-link:hover,
+  .header .how-works-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .header .about-us-link:focus-visible,
+  .header .how-works-link:focus-visible {
+    outline: 2px solid #fecaca;
+    outline-offset: 2px;
+  }
+
   

@@ -6,10 +6,15 @@ const allergySchema = new mongoose.Schema({
 }, { _id: false });
 
 const dataSchema = new mongoose.Schema({
+    /** Groups rows from one "Find restaurants" search so we do not return the whole collection. */
+    searchId: {
+        type: String,
+        required: true,
+        index: true
+    },
     place_id: { 
         type: String, 
-        required: true, 
-        unique: true 
+        required: true
     },
     name: { 
         type: String, 
@@ -35,6 +40,7 @@ const dataSchema = new mongoose.Schema({
     allergyAnalysis: allergySchema
 }, { timestamps: true });
 
+dataSchema.index({ place_id: 1, searchId: 1 }, { unique: true });
 
 const Data = mongoose.model("Data", dataSchema);
 

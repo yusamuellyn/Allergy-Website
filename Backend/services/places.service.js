@@ -1,12 +1,29 @@
 import axios from "axios";
-export const getAllRestaurants = async (query, placesKey) => {
+export const getAllRestaurants = async (address, placesKey) => {
     let allResults = [];
     let hasNextPage = true;
 
+    const geoRes = await axios.get(
+        "https://maps.googleapis.com/maps/api/geocode/json",
+        {
+          params: {
+            address,
+            key: placesKey
+          }
+        }
+      );
+    
+      if (!geoRes.data.results.length) {
+        throw new Error("Invalid address");
+      }
+    
+      const { lat, lng } = geoRes.data.results[0].geometry.location;
+
     let params = {
-        query: query,
-        type: "restaurant",
-        key: placesKey
+        query: "restaurants",
+        radius: 1000,
+        location: `${lat},${lng}`,
+        key:placesKey
     };
 
     while (hasNextPage) {

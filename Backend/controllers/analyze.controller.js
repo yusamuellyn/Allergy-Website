@@ -1,11 +1,16 @@
 import asyncHandler from "express-async-handler";
 import Data from "../models/Data.js";
-import axios from "axios";
 import { analyzeMenuAllergies } from "../services/gemini.serivce.js";
-import {scrapeMenuFromWebsite} from "../services/scrape.service.js"
+import { scrapeMenuFromWebsite } from "../services/scrape.service.js";
 
 const getAnalyzeData = asyncHandler(async (req, res) => {
+    const { searchId } = req.query;
+    if (!searchId || typeof searchId !== "string") {
+        return res.status(400).json({ message: "searchId query parameter is required" });
+    }
+
     const restaurants = await Data.find({
+        searchId,
         website: { $ne: null },
         menuText: { $exists: false }
     });
@@ -15,15 +20,15 @@ const getAnalyzeData = asyncHandler(async (req, res) => {
     
     for (const restaurant of restaurants) {
         if (processedCount >= maxToProcess) break;
-    
-        const menuText = await scrapeMenuFromWebsite(restaurant.website);
-        if (!menuText) continue; 
-    
+
+        const scraped = await scrapeMenuFromWebsite(restaurant.website);
+        const menuText = scraped && scraped.trim() ? scraped : "";
+
         await Data.updateOne(
-            { place_id: restaurant.place_id },
+            { _id: restaurant._id },
             { $set: { menuText } }
         );
-    
+
         processedCount++;
     }
     
@@ -31,14 +36,14 @@ const getAnalyzeData = asyncHandler(async (req, res) => {
         await new Promise(r => setTimeout(r, 300));
 
     const allRestaurants = await Data.find({
-        menuText: { $type: "string", $ne: "" },
+        searchId,
         allergyAnalysis: { $exists: false }
     }).limit(6);
 
     for (const menu of allRestaurants) {
-        if (!menu.menuText) continue;
-
-        await analyzeMenuAllergies(menu.menuText, menu.place_id, menu.name);
+        await analyzeMenuAllergies(menu.menuText, menu._id, menu.name, {
+            address: menu.address
+        });
         await new Promise(r => setTimeout(r, 400)); // delay between API calls
     }
 

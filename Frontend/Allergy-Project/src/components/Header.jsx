@@ -5,7 +5,12 @@ export function Header() {
         <>
             <div className="header">
                 <div className="left-section">
-                    Allergy Project
+                    <Link className="header-brand" to="/">
+                        <span className="header-brand-mark" aria-hidden="true" />
+                        <span className="header-brand-text">
+                            <span className="header-brand-title">Allergy Project</span>
+                        </span>
+                    </Link>
                 </div>
 
 
