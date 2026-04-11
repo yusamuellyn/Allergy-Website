@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { Header } from '../components/Header';
 import axios from 'axios';
 import "./HomePage.css";
+import '@geoapify/geocoder-autocomplete/styles/minimal.css';
+import {
+  GeoapifyContext,
+  GeoapifyGeocoderAutocomplete
+} from '@geoapify/react-geocoder-autocomplete';
+
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5001").replace(/\/$/, "");
+const GEOAPIFY_API_KEY = import.meta.env.VITE_GEOAPIFY_API_KEY || "";
 
 function toWebsiteHref(url) {
     if (!url || typeof url !== 'string') return null;
@@ -17,6 +25,15 @@ export function HomePage() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const onPlaceSelected = (value) => {
+        const formatted = value.properties.formatted;
+        setInputText(formatted);
+      };
+
+    const onSuggestionsChange = (value) => {
+        console.log("Suggestions:", value);
+      };
+
     function saveInputText(event) {
         setInputText(event.target.value);
     }
@@ -28,10 +45,7 @@ export function HomePage() {
         setIsLoading(true);
         try {
             setData([]);
-            const response = await axios.post(
-                "http://localhost:5001/api/postPlaces",
-                { address }
-            );
+            const response = await axios.post(`${API_BASE}/api/postPlaces`, { address });
 
             const searchId = response.data?.searchId;
             if (!searchId) {
@@ -39,11 +53,11 @@ export function HomePage() {
                 return;
             }
 
-            await axios.get("http://localhost:5001/api/analyzePlaces", {
+            await axios.get(`${API_BASE}/api/analyzePlaces`, {
                 params: { searchId }
             });
 
-            const allData = await axios.get("http://localhost:5001/api/getAllData", {
+            const allData = await axios.get(`${API_BASE}/api/getAllData`, {
                 params: { searchId }
             });
             setData(allData.data);
@@ -80,14 +94,22 @@ export function HomePage() {
                     </p>
                 </section>
                 <div className="user-input-container">
-                    <input
-                        placeholder="Enter your address" size="30"
-                        onChange={saveInputText}
-                        value={inputText}
-                        className="address-input"
-                        disabled={isLoading}
-                        aria-busy={isLoading}
-                    />
+                    <div className="address-field-combo">
+    
+                        <div className="address-field-geocoder">
+                            <GeoapifyContext apiKey={GEOAPIFY_API_KEY}>
+                                <GeoapifyGeocoderAutocomplete
+                                    placeholder="Enter your address…"
+                                    lang="en"
+                                    limit={8}
+                                    addDetails={true}
+                                    placeSelect={onPlaceSelected}
+                                    suggestionsChange={onSuggestionsChange}
+                                />
+                            </GeoapifyContext>
+                        </div>
+                    </div>
+
                     <button
                         type="button"
                         onClick={sendAddress}
