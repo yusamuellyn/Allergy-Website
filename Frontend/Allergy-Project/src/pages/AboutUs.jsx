@@ -13,20 +13,21 @@ export function AboutUs() {
                         About <span className="title-accent">us</span>
                     </h1>
                     <p className="about-lead">
-                        [TEMP] Short one-sentence tagline — replace with what you want visitors to
-                        remember first.
+                        A small project built to make allergy-aware dining decisions feel less stressful.
                     </p>
                 </header>
 
                 <section className="about-section">
                     <h2>Our story</h2>
                     <p>
-                        [TEMP] Paragraph 1: Who you are, why you built this, and what problem you
-                        care about (food allergies, dining out, transparency, etc.).
+                        Eating out with food allergies can mean a lot of uncertainty. Menus aren&apos;t
+                        always clear, ingredients can be hidden in sauces, and cross-contact risk is
+                        hard to judge from a quick glance.
                     </p>
                     <p>
-                        [TEMP] Paragraph 2: Optional — how the idea started, a personal note, or
-                        what you hope changes for people who use the site.
+                        This tool is meant to help you start the conversation: it finds nearby restaurants,
+                        pulls what it can from public information, and summarizes likely allergy risks so
+                        you can decide where to look deeper or who to call.
                     </p>
                 </section>
 
@@ -34,23 +35,22 @@ export function AboutUs() {
                     <article className="about-card">
                         <h3>Mission</h3>
                         <p>
-                            [TEMP] One or two sentences on your mission — e.g. making it easier to
-                            choose where to eat with clearer allergy-related signals.
+                            Give people a faster way to shortlist restaurants and spot common allergy
+                            risks before they arrive.
                         </p>
                     </article>
                     <article className="about-card">
                         <h3>What this tool does</h3>
                         <p>
-                            [TEMP] Plain-language summary: address search, nearby restaurants,
-                            menu scraping, and AI-assisted risk context — adjust to match your
-                            actual features.
+                            You enter an address, we find nearby restaurants with websites, extract menu-like
+                            text when possible, and generate an allergy risk score plus top allergen/risk tags.
                         </p>
                     </article>
                     <article className="about-card">
                         <h3>Important note</h3>
                         <p>
-                            [TEMP] Disclaimer: this is informational, not medical or legal advice;
-                            always confirm with the restaurant. Edit to your comfort level.
+                            This is informational only. Always confirm ingredients and preparation with the
+                            restaurant—especially for severe allergies.
                         </p>
                     </article>
                 </div>
@@ -58,7 +58,8 @@ export function AboutUs() {
                 <section className="about-section about-section-narrow">
                     <h2>Contact / feedback</h2>
                     <p>
-                        [TEMP] How people can reach you — email, form, GitHub, or “coming soon.”
+                        If you find a menu that wasn&apos;t captured well or have ideas to improve results,
+                        send feedback and we&apos;ll keep iterating.
                     </p>
                 </section>
 
