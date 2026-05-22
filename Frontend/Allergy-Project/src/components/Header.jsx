@@ -6,9 +6,15 @@ export function Header() {
             <div className="header">
                 <div className="left-section">
                     <Link className="header-brand" to="/">
-                        <span className="header-brand-mark" aria-hidden="true" />
+                        <img
+                            className="header-brand-logo"
+                            src="/restaurant-iq-logo.png"
+                            alt="Restaurant IQ"
+                        />
                         <span className="header-brand-text">
-                            <span className="header-brand-title">restuarantIQ</span>
+                            <span className="header-brand-title">
+                                Restaurant<span className="header-brand-iq">IQ</span>
+                            </span>
                         </span>
                     </Link>
                 </div>
