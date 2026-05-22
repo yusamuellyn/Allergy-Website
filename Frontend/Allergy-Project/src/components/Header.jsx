@@ -8,7 +8,7 @@ export function Header() {
                     <Link className="header-brand" to="/">
                         <span className="header-brand-mark" aria-hidden="true" />
                         <span className="header-brand-text">
-                            <span className="header-brand-title">Allergy Project</span>
+                            <span className="header-brand-title">restuarantIQ</span>
                         </span>
                     </Link>
                 </div>
